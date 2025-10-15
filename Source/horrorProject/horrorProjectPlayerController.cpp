@@ -39,6 +39,7 @@ void AhorrorProjectPlayerController::BeginPlay()
 		}
 
 	}
+
 }
 
 void AhorrorProjectPlayerController::SetupInputComponent()
