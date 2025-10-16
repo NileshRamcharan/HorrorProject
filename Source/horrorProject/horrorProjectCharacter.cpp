@@ -133,6 +133,8 @@ void AhorrorProjectCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	GetMesh()->HideBoneByName("weapon_r", EPhysBodyOp::PBO_None);
+
 	Gun = GetWorld()->SpawnActor<AGun>(GunClass);
 	if (Gun)
 	{
