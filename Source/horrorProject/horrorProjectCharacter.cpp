@@ -133,12 +133,15 @@ void AhorrorProjectCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	GetFirstPersonMesh()->HideBoneByName("weapon_r", EPhysBodyOp::PBO_None);
 	GetMesh()->HideBoneByName("weapon_r", EPhysBodyOp::PBO_None);
+	
 
 	Gun = GetWorld()->SpawnActor<AGun>(GunClass);
 	if (Gun)
 	{
 		Gun->SetOwner(this);
-		Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
+		Gun->AttachToComponent(GetFirstPersonMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
+		Gun->OwnerController = GetController();
 	}
 }
