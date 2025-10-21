@@ -14,4 +14,9 @@ class HORRORPROJECT_API AHorrorAI : public AAIController
 {
 	GENERATED_BODY()
 	
+protected:
+	virtual void BeginPlay() override;
+
+public:
+	virtual void Tick(float DeltaTime) override;
 };
