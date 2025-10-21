@@ -76,6 +76,11 @@ void AhorrorProjectCharacter::Shoot()
 	// pull the trigger of gun
 }
 
+void AhorrorProjectCharacter::OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
+{
+	UE_LOG(LogTemp, Display, TEXT("Damage taken: %f"), Damage);
+}
+
 
 void AhorrorProjectCharacter::MoveInput(const FInputActionValue& Value)
 {
@@ -132,6 +137,8 @@ void AhorrorProjectCharacter::DoJumpEnd()
 void AhorrorProjectCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	OnTakeAnyDamage.AddDynamic(this, &AhorrorProjectCharacter::OnDamageTaken);
 
 	GetFirstPersonMesh()->HideBoneByName("weapon_r", EPhysBodyOp::PBO_None);
 	GetMesh()->HideBoneByName("weapon_r", EPhysBodyOp::PBO_None);
