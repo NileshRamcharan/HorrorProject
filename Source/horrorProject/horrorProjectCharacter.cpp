@@ -73,12 +73,25 @@ void AhorrorProjectCharacter::Shoot()
 {
 	if(Gun)
 		Gun->PullTrigger();
-	// pull the trigger of gun
 }
 
 void AhorrorProjectCharacter::OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
-	UE_LOG(LogTemp, Display, TEXT("Damage taken: %f"), Damage);
+	if (IsAlive)
+		UE_LOG(LogTemp, Display, TEXT("Damage taken: %f"), Damage);
+
+	{
+		Health -= Damage;
+		if (Health <= 0.0f)
+		{
+			IsAlive = false;
+			Health = 0.0f;
+			GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+			UE_LOG(LogTemp, Display, TEXT("Character died: %s"), *GetActorNameOrLabel());
+
+		}
+	}
 }
 
 
@@ -139,6 +152,7 @@ void AhorrorProjectCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	OnTakeAnyDamage.AddDynamic(this, &AhorrorProjectCharacter::OnDamageTaken);
+	Health = MaxHealth;
 
 	GetFirstPersonMesh()->HideBoneByName("weapon_r", EPhysBodyOp::PBO_None);
 	GetMesh()->HideBoneByName("weapon_r", EPhysBodyOp::PBO_None);
