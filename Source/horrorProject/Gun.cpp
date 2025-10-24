@@ -28,8 +28,6 @@ void AGun::BeginPlay()
 {
 	Super::BeginPlay();
 	MuzzleFlashParticleSystem->Deactivate();
-
-	LOG_WARNING("this is a warning");
 }
 
 // Called every frame
