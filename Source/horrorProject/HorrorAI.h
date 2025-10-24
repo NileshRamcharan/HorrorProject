@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+
+#include "horrorProjectCharacter.h"
 #include "HorrorAI.generated.h"
 
 /**
@@ -19,4 +21,12 @@ protected:
 
 public:
 	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY(EditAnywhere)
+	UBehaviorTree* EnemyAIBehaviorTree;
+
+	AhorrorProjectCharacter* PlayerCharacter;
+	AhorrorProjectCharacter* MyCharacter;
+
+	void StartBehaviorTree(AhorrorProjectCharacter* Player);
 };

@@ -16,6 +16,9 @@ class AhorrorProjectGameMode : public AGameModeBase
 
 public:
 	AhorrorProjectGameMode();
+
+protected:
+	virtual void BeginPlay() override;
 };
 
 

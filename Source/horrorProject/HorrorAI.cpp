@@ -9,13 +9,14 @@ void AHorrorAI::BeginPlay()
 {
 	Super::BeginPlay();
 
+	
 }
 
 void AHorrorAI::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+	/*APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
 	if (PlayerPawn)
 	{
 		if (LineOfSightTo(PlayerPawn))
@@ -29,6 +30,19 @@ void AHorrorAI::Tick(float DeltaTime)
 			StopMovement();
 		}
 		
-	}
+	}*/
 
+}
+
+void AHorrorAI::StartBehaviorTree(AhorrorProjectCharacter* Player)
+{
+	if (EnemyAIBehaviorTree)
+	{
+		MyCharacter = Cast<AhorrorProjectCharacter>(GetPawn());
+		if (Player)
+		{
+			PlayerCharacter = Player;
+		}
+		RunBehaviorTree(EnemyAIBehaviorTree);
+	}
 }
